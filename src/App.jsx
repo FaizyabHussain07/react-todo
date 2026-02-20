@@ -8,28 +8,38 @@ function App() {
   const [todos, setTodos] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [filter, setFilter] = useState('all')
+  const [isLoaded, setIsLoaded] = useState(false)
 
   // Load todos from localStorage on mount
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
-      setTodos(JSON.parse(savedTodos))
+      try {
+        setTodos(JSON.parse(savedTodos))
+      } catch (e) {
+        console.error('Failed to parse saved todos:', e)
+      }
     }
+    setIsLoaded(true)
   }, [])
 
   // Save todos to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos])
+    if (isLoaded) {
+      localStorage.setItem('todos', JSON.stringify(todos))
+    }
+  }, [todos, isLoaded])
 
   // Add new todo
-  const addTodo = (e) => {
+  const addTodo = (e, dueDateTime = null) => {
     e.preventDefault()
     if (inputValue.trim()) {
       const newTodo = {
         id: Date.now(),
         text: inputValue.trim(),
-        completed: false
+        completed: false,
+        createdAt: new Date().toISOString(),
+        dueDate: dueDateTime
       }
       setTodos([newTodo, ...todos])
       setInputValue('')
@@ -54,9 +64,9 @@ function App() {
   }
 
   // Edit todo
-  const editTodo = (id, newText) => {
+  const editTodo = (id, newText, newDueDate = null) => {
     setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, text: newText } : todo
+      todo.id === id ? { ...todo, text: newText, dueDate: newDueDate } : todo
     ))
   }
 
@@ -81,21 +91,21 @@ function App() {
       <div className={styles.container}>
         <h1 className={styles.title}>Todos</h1>
 
-        <TodoForm 
+        <TodoForm
           inputValue={inputValue}
           setInputValue={setInputValue}
           addTodo={addTodo}
         />
 
-        <TodoList 
+        <TodoList
           todos={filteredTodos}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
           editTodo={editTodo}
         />
 
-        {/* {todos.length > 0 && (
-          <TodoFooter 
+        {todos.length > 0 && (
+          <TodoFooter
             activeCount={activeCount}
             completedCount={completedCount}
             filter={filter}
@@ -103,7 +113,7 @@ function App() {
             clearCompleted={clearCompleted}
             deleteAll={deleteAll}
           />
-        )} */}
+        )}
       </div>
     </div>
   )

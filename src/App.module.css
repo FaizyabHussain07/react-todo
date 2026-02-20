@@ -53,6 +53,35 @@
   margin-bottom: var(--spacing-md);
 }
 
+.formContainer {
+  padding: 0 var(--spacing-lg) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.formRow {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.dateTimeRow {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.dateLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.dateLabel span {
+  white-space: nowrap;
+}
+
 .input {
   color: var(--text-color);
   flex: 1;
@@ -373,43 +402,177 @@
   .app {
     padding: var(--spacing-sm);
   }
-  
+
   .title {
     font-size: 2rem;
     margin: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
   }
-  
-  .form {
+
+  .formContainer {
     padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
+  .formRow {
     flex-direction: column;
   }
-  
+
   .addButton {
     width: 100%;
   }
-  
+
   .footer {
     padding: var(--spacing-md);
     justify-content: center;
   }
-  
+
   .filters {
     order: -1;
     width: 100%;
     justify-content: center;
   }
-  
+
   .todoItem {
     padding: var(--spacing-sm) var(--spacing-md);
   }
-  
+
   .deleteButton {
     opacity: 1;
     transform: scale(1);
   }
-  
+
   .editButton {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Date/Time Input Styles */
+.dateInput,
+.timeInput {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  background: var(--surface);
+  color: var(--text-color);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dateInput:focus,
+.timeInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.dateInput:disabled,
+.timeInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Style for date/time inputs in dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* Date Info Display */
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
+  font-size: 0.75rem;
+}
+
+.createdDate {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.dueDate {
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.overdueText {
+  color: #ef4444;
+}
+
+.overdue {
+  color: #ef4444 !important;
+}
+
+.overdueBadge {
+  background: #ef4444;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.todoTextContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Edit form date/time */
+.editFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.editDateTime {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.editDateTime .dateInput,
+.editDateTime .timeInput {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.75rem;
+}
+
+.clearDateButton {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.clearDateButton:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.editButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+@media (max-width: 640px) {
+  .dateInfo {
+    font-size: 0.625rem;
   }
 }

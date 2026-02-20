@@ -43,6 +43,7 @@ src/
 │   └── TodoFooter.jsx   # Filters and actions
 ├── App.jsx              # Main application component
 ├── App.module.css       # All styles
+├── index.css            # Global styles
 └── main.jsx             # Entry point
 ```
 
@@ -57,7 +58,7 @@ src/
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd todo-web
+cd react-todo
 ```
 
 2. Install dependencies:
@@ -136,6 +137,10 @@ npm run dev
 This project is open source and available under the [MIT License](LICENSE).
 
 ## Built With
+
+- [React](https://reactjs.org/) - UI library
+- [Vite](https://vitejs.dev/) - Build tool
+- [CSS Modules](https://github.com/css-modules/css-modules) - Styling
 
 - [React](https://reactjs.org/) - UI library
 - [Vite](https://vitejs.dev/) - Build tool

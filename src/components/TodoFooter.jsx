@@ -6,7 +6,7 @@ function TodoFooter({ activeCount, completedCount, filter, setFilter, clearCompl
       <span className={styles.count}>
         {activeCount} {activeCount === 1 ? 'item' : 'items'} left
       </span>
-      
+
       <div className={styles.filters}>
         <button
           className={`${styles.filterButton} ${filter === 'all' ? styles.active : ''}`}
@@ -27,7 +27,7 @@ function TodoFooter({ activeCount, completedCount, filter, setFilter, clearCompl
           Completed
         </button>
       </div>
-      
+
       <div className={styles.actionButtons}>
         {completedCount > 0 && (
           <button
